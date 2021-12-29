@@ -1292,13 +1292,14 @@ class Stack_array
     }
     void MyStack()
     {
-        int choice,val;
+        int choice;
             cout<<"  -------------------------------------------------------"<<endl;
             cout<<" |                  Stack using Array                    |"<<endl;
             cout<<"  -------------------------------------------------------"<<endl<<endl;
             
             while(1)
             {
+                int choice,val;
                 cout<<endl;
                 cout<<"    X---------Various operations on Stack---------X"<<endl<<endl;
                 
@@ -1340,8 +1341,16 @@ class Stack_array
                         Display_Stack_array();
                         break;
                     case 5: 
+                        if(stackTop()!=-1)
+                        {
                         cout<<"\nData  at Top of Stack :> "<<stackTop()<<endl;
                         X();
+                        }
+                        else
+                        {
+                            cout<<"\nStack is Empty"<<endl;
+                            X();
+                        }
                         break;
                     case 6:
                         if(isEmpty())
