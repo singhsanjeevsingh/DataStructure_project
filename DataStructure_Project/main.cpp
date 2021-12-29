@@ -186,7 +186,7 @@ class Array{
                 cout<<"\t*       6.Find maximum element                *"<<endl;
                 cout<<"\t|       7.Find minimum element                |"<<endl;
                 cout<<"\t*       8.Reverse the Array                   *"<<endl;
-                cout<<"\t|       9.Exit                                |"<<endl;
+                cout<<"\t|       9.back                                |"<<endl;
                 cout<<"\t*-*-*-*-*-*-*-*-*-*-*-*-*-*-*--*-*-*-**-*-*-*-*"<<endl;
                 cout<<endl;
                 cout<<"Enter your choice :>   ";
@@ -479,7 +479,7 @@ class SinglyLinkedList{
                 cout<<"\t*   7.Display Linked List   *"<<endl;
                 cout<<"\t|   8.Reverse Linked List   |"<<endl;
                 cout<<"\t*   9.Number of nodes       *"<<endl;
-                cout<<"\t|   10.Exit                 |"<<endl;
+                cout<<"\t|   10.Back                 |"<<endl;
                 cout<<"\t*-*-*-*-*-*-*-*-*-*-*-*-*-*-*"<<endl;
                 cout<<"Enter your choice :>   ";
                 cin>>choice;
@@ -762,7 +762,7 @@ class DLL{
                 cout<<"\t*   7.Display DLL           *"<<endl;
                 cout<<"\t|   8.Reverse DLL           |"<<endl;
                 cout<<"\t*   9.Number of nodes       *"<<endl;
-                cout<<"\t|   10.Exit                 |"<<endl;
+                cout<<"\t|   10.Back                 |"<<endl;
                 cout<<"\t*-*-*-*-*-*-*-*-*-*-*-*-*-*-*"<<endl;
                 cout<<"Enter your choice :>   ";
                 cin>>choice;
@@ -1060,7 +1060,7 @@ class CLL{
                 cout<<"\t*   7.Display Linked List   *"<<endl;
                 cout<<"\t|   8.Reverse Linked List   |"<<endl;
                 cout<<"\t*   9.Number of nodes       *"<<endl;
-                cout<<"\t|   10.Exit                 |"<<endl;
+                cout<<"\t|   10.Back                 |"<<endl;
                 cout<<"\t*-*-*-*-*-*-*-*-*-*-*-*-*-*-*"<<endl;
                 cout<<"Enter your choice :>   ";
                 cin>>choice;
@@ -1134,7 +1134,7 @@ class LinkedList :public SinglyLinkedList,public DLL,public CLL
                 cout<<"\t*   1.Singly Linked List          *"<<endl;
                 cout<<"\t|   2.Doubly Linked List          |"<<endl;
                 cout<<"\t*   3.Circular Singly Linked List *"<<endl;
-                cout<<"\t|   4.Exit                        |"<<endl;
+                cout<<"\t|   4.Back                        |"<<endl;
                 cout<<"\t*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*"<<endl;
                 cout<<"\nEnter your choice :> ";
                 cin>>choice;
@@ -1290,16 +1290,16 @@ class Stack_array
             temp2.pop();
         }
     }
-    void MyStack()
+    void MyStack_array()
     {
-        int choice;
+        int choice,val;
             cout<<"  -------------------------------------------------------"<<endl;
             cout<<" |                  Stack using Array                    |"<<endl;
             cout<<"  -------------------------------------------------------"<<endl<<endl;
             
             while(1)
             {
-                int choice,val;
+                
                 cout<<endl;
                 cout<<"    X---------Various operations on Stack---------X"<<endl<<endl;
                 
@@ -1314,7 +1314,7 @@ class Stack_array
                 cout<<"\t|   7.Check if Stacki is Full   |"<<endl;
                 cout<<"\t*   8.Display size of stack     *"<<endl;
                 cout<<"\t|   9.Reverse Stack             |"<<endl;
-                cout<<"\t|   10.Exit                     |"<<endl;
+                cout<<"\t|   10.Back                     |"<<endl;
                 cout<<"\t*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*"<<endl;
                 cout<<"\nEnter your choice :> ";
                 cin>>choice;
@@ -1391,7 +1391,219 @@ class Stack_array
     }
 };
 class Stack_LL{
-
+    LNode *top;
+public:
+    Stack_LL()
+    {
+        top=nullptr;
+    }
+    void X(){
+        for(int i=0;i<28;i++)
+            cout<<"*-*";
+        cout<<endl;
+    }
+    bool isEmpty()
+    {
+        return (top==nullptr)?true:false;
+    }
+    void push(int data)
+    {
+        LNode *temp=new LNode(data);
+        temp->next=top;
+        top=temp;
+    }
+    int pop()
+    {
+        if(isEmpty())
+        {
+            cout<<"\nStack is Empty"<<endl;
+            return -1;
+            X(); 
+        }
+        int val=top->data;
+        top=top->next;
+        return val;
+    }
+    int peek()
+    {
+        if(isEmpty())
+        {
+            cout<<"\nStack is Empty"<<endl;
+            return -1;
+            X(); 
+        }
+        int val=top->data;
+        return val;
+    }
+    void Stack_size()
+    {
+        if(isEmpty())
+        {
+            cout<<"\nStack is Empty"<<endl;
+            return;
+            X(); 
+        }   
+            int s=0;
+            LNode *temp=top;
+            while(temp)
+            {
+                s++;
+                temp=temp->next;
+            }
+            cout<<"\n Size of Stack :> "<<s<<endl;
+            X();
+    }
+    void Display_StackLL()
+    {
+        LNode *temp=top;
+        cout<<"\nData in stack :> ";
+        while(temp)
+        {
+            cout<<" "<<temp->data<<" ";
+            temp=temp->next;
+        }
+        cout<<endl;
+        X();
+    }
+    void checkEmpty()
+    {
+        if(isEmpty())
+        {
+            cout<<"\nStack is Empty"<<endl;
+            X(); 
+        }   
+        else{
+            cout<<"\nStack is Not Empty"<<endl;
+            X();
+        }
+    }
+    void Reverse_stackLL()
+    {
+        Stack_LL temp1,temp2;
+        while(!isEmpty())
+        {
+            temp1.push(peek());
+            pop();
+        }
+        while(!temp1.isEmpty())
+        {
+            temp2.push(temp1.peek());
+            temp1.pop();
+        }
+        while(!temp2.isEmpty())
+        {
+            push(temp2.peek());
+            temp2.pop();
+        }
+    }
+    void MyStack_LL()
+    {
+        int choice,val;
+        cout<<"  -------------------------------------------------------"<<endl;
+        cout<<" |             Satck using Linked List                   |"<<endl;
+        cout<<"  -------------------------------------------------------"<<endl<<endl;
+            
+        while(1)
+        {
+                cout<<endl;
+                cout<<"    X---------Various operations on Stack---------X"<<endl<<endl;
+                
+                cout<<"\t*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*"<<endl;
+                cout<<"\t|                               |"<<endl;
+                cout<<"\t*   1.Push in Stack             *"<<endl;
+                cout<<"\t|   2.Pop in Stack              |"<<endl;  
+                cout<<"\t*   3.Peek in stack             *"<<endl;
+                cout<<"\t|   4.Display data in Stack     |"<<endl;
+                cout<<"\t*   5.Check if Stack is Empty   *"<<endl;
+                cout<<"\t*   6.Display size of stack     *"<<endl;
+                cout<<"\t|   7.Reverse Stack             |"<<endl;
+                cout<<"\t|   8.Back                      |"<<endl;
+                cout<<"\t*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*"<<endl;
+                cout<<"\nEnter your choice :> ";
+                cin>>choice;
+                switch(choice)
+                {
+                    case 1:
+                        cout<<"\nEnter data to push :> ";
+                        cin>>val;
+                        push(val);
+                        cout<<"\nData inserted in stack"<<endl;
+                        X();
+                        break;
+                    case 2: 
+                        val=pop();
+                        if(val==-1){return;}
+                        cout<<"\n "<<val<<" deleted from Stack"<<endl;
+                        X();
+                        break;
+                    case 3:
+                        val=peek();
+                        if(val==-1) {return;}
+                        cout<<"\nValue at top in stack :> "<<val<<endl;
+                        X();
+                        break;
+                    case 4:
+                        Display_StackLL();
+                        break;
+                    case 5:
+                        checkEmpty();
+                        break;
+                    case 6:
+                        Stack_size();
+                        break;
+                    case 7:
+                        Reverse_stackLL();
+                        break;
+                    case 8:
+                        return ;
+                    default:
+                        cout<<"\nWrong choice"<<endl;
+                }
+            }    
+    }
+};
+class Stack:public Stack_array,public Stack_LL
+{
+public:
+    void MyStack()
+    {
+        int choice;
+            cout<<"  -------------------------------------------------------"<<endl;
+            cout<<" |                          Stack                        |"<<endl;
+            cout<<"  -------------------------------------------------------"<<endl<<endl;
+            
+            while(1)
+            {
+                cout<<endl;
+                cout<<"    X----------Various implementation of Stack-----------X"<<endl<<endl;
+                
+                cout<<"\t*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*"<<endl;
+                cout<<"\t|   1.Stack using Array           |"<<endl;
+                cout<<"\t*   2.Stack using Linked List     *"<<endl;
+                cout<<"\t|   3.Back                        |"<<endl;
+                cout<<"\t*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*"<<endl;
+                cout<<"\nEnter your choice :> ";
+                cin>>choice;
+                switch(choice)
+                {
+                    case 1:
+                    {
+                        MyStack_array();
+                    }
+                        break;
+                    case 2:
+                    {
+                        MyStack_LL();
+                    }
+                        break;
+                    case 3:
+                        return;
+                    default: 
+                        cout<<"\nWrong choice"<<endl;
+                }
+            }
+        
+    }
 };
 int main()
 {
@@ -1405,8 +1617,8 @@ int main()
         cout<<"\t\t*-*-*-*-*-*-*-*-*-*-*-*-*-*-*"<<endl;
         cout<<"\t\t|   1.Array                 |"<<endl;
         cout<<"\t\t*   2.Linked List           *"<<endl;
-        cout<<"\t\t|   3.Stack using Array     |"<<endl;
-        cout<<"\t\t|   4.Exit                  |"<<endl;          
+        cout<<"\t\t|   3.Stack                 |"<<endl;
+        cout<<"\t\t*   4.Exit                  *"<<endl;
         cout<<"\t\t*-*-*-*-*-*-*-*-*-*-*-*-*-*-*"<<endl;
         cout<<endl;
         cout<<"Enter your choice:-> ";
@@ -1427,8 +1639,8 @@ int main()
                 break;
             case 3:
             {
-                Stack_array sa;
-                sa.MyStack();
+                Stack s;
+                s.MyStack();
             }
                 break;
             case 4:
@@ -1438,4 +1650,3 @@ int main()
         }
     }
 }
-
