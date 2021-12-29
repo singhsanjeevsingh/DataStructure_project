@@ -5,11 +5,10 @@
 ## Debug
 ProjectName            :=DataStructure_Project
 ConfigurationName      :=Debug
-WorkspaceConfiguration := $(ConfigurationName)
-WorkspacePath          :=D:/progrmming/datastructure/datastructure
+WorkspacePath          :=D:/progrmming/datastructure/datastructure/DataStructure_Project
 ProjectPath            :=D:/progrmming/datastructure/datastructure/DataStructure_Project
-IntermediateDirectory  :=../build-$(ConfigurationName)/DataStructure_Project
-OutDir                 :=../build-$(ConfigurationName)/DataStructure_Project
+IntermediateDirectory  :=$(ConfigurationName)
+OutDir                 := $(IntermediateDirectory)
 CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
@@ -28,22 +27,23 @@ OutputSwitch           :=-o
 LibraryPathSwitch      :=-L
 PreprocessorSwitch     :=-D
 SourceSwitch           :=-c 
-OutputFile             :=..\build-$(ConfigurationName)\bin\$(ProjectName)
+OutputFile             :=$(IntermediateDirectory)/$(ProjectName)
 Preprocessors          :=
 ObjectSwitch           :=-o 
 ArchiveOutputSwitch    := 
 PreprocessOnlySwitch   :=-E
-ObjectsFileList        :=$(IntermediateDirectory)/ObjectsList.txt
+ObjectsFileList        :="DataStructure_Project.txt"
 PCHCompileFlags        :=
+MakeDirCommand         :=makedir
 RcCmpOptions           := 
 RcCompilerName         :="C:/Program Files (x86)/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/bin/windres.exe"
-LinkOptions            :=  
+LinkOptions            :=  -O0
 IncludePath            :=  $(IncludeSwitch). $(IncludeSwitch). 
 IncludePCH             := 
 RcIncludePath          := 
 Libs                   := 
 ArLibs                 :=  
-LibPath                := $(LibraryPathSwitch). 
+LibPath                := $(LibraryPathSwitch). $(LibraryPathSwitch). $(LibraryPathSwitch)Debug 
 
 ##
 ## Common variables
@@ -52,8 +52,8 @@ LibPath                := $(LibraryPathSwitch).
 AR       := "C:/Program Files (x86)/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/bin/ar.exe" rcu
 CXX      := "C:/Program Files (x86)/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/bin/g++.exe"
 CC       := "C:/Program Files (x86)/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/bin/gcc.exe"
-CXXFLAGS :=  -g -O0 -Wall $(Preprocessors)
-CFLAGS   :=  -g -O0 -Wall $(Preprocessors)
+CXXFLAGS :=  -g -Wall $(Preprocessors)
+CFLAGS   :=   $(Preprocessors)
 ASFLAGS  := 
 AS       := "C:/Program Files (x86)/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/bin/as.exe"
 
@@ -62,7 +62,7 @@ AS       := "C:/Program Files (x86)/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/
 ## User defined environment variables
 ##
 CodeLiteDir:=C:\Program Files\CodeLite
-Objects0=../build-$(ConfigurationName)/DataStructure_Project/main.cpp$(ObjectSuffix) 
+Objects0=$(IntermediateDirectory)/main.cpp$(ObjectSuffix) 
 
 
 
@@ -72,20 +72,20 @@ Objects=$(Objects0)
 ## Main Build Targets 
 ##
 .PHONY: all clean PreBuild PrePreBuild PostBuild MakeIntermediateDirs
-all: MakeIntermediateDirs $(OutputFile)
+all: $(OutputFile)
 
-$(OutputFile): ../build-$(ConfigurationName)/DataStructure_Project/.d $(Objects) 
-	@if not exist "..\build-$(ConfigurationName)\DataStructure_Project" mkdir "..\build-$(ConfigurationName)\DataStructure_Project"
+$(OutputFile): $(IntermediateDirectory)/.d $(Objects) 
+	@$(MakeDirCommand) $(@D)
 	@echo "" > $(IntermediateDirectory)/.d
 	@echo $(Objects0)  > $(ObjectsFileList)
 	$(LinkerName) $(OutputSwitch)$(OutputFile) @$(ObjectsFileList) $(LibPath) $(Libs) $(LinkOptions)
 
 MakeIntermediateDirs:
-	@if not exist "..\build-$(ConfigurationName)\DataStructure_Project" mkdir "..\build-$(ConfigurationName)\DataStructure_Project"
-	@if not exist ""..\build-$(ConfigurationName)\bin"" mkdir ""..\build-$(ConfigurationName)\bin""
+	@$(MakeDirCommand) "$(ConfigurationName)"
 
-../build-$(ConfigurationName)/DataStructure_Project/.d:
-	@if not exist "..\build-$(ConfigurationName)\DataStructure_Project" mkdir "..\build-$(ConfigurationName)\DataStructure_Project"
+
+$(IntermediateDirectory)/.d:
+	@$(MakeDirCommand) "$(ConfigurationName)"
 
 PreBuild:
 
@@ -93,20 +93,18 @@ PreBuild:
 ##
 ## Objects
 ##
-../build-$(ConfigurationName)/DataStructure_Project/main.cpp$(ObjectSuffix): main.cpp ../build-$(ConfigurationName)/DataStructure_Project/main.cpp$(DependSuffix)
+$(IntermediateDirectory)/main.cpp$(ObjectSuffix): main.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/main.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/main.cpp$(DependSuffix) -MM main.cpp
 	$(CXX) $(IncludePCH) $(SourceSwitch) "D:/progrmming/datastructure/datastructure/DataStructure_Project/main.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IncludePath)
-../build-$(ConfigurationName)/DataStructure_Project/main.cpp$(DependSuffix): main.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT../build-$(ConfigurationName)/DataStructure_Project/main.cpp$(ObjectSuffix) -MF../build-$(ConfigurationName)/DataStructure_Project/main.cpp$(DependSuffix) -MM main.cpp
-
-../build-$(ConfigurationName)/DataStructure_Project/main.cpp$(PreprocessSuffix): main.cpp
-	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) ../build-$(ConfigurationName)/DataStructure_Project/main.cpp$(PreprocessSuffix) main.cpp
+$(IntermediateDirectory)/main.cpp$(PreprocessSuffix): main.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/main.cpp$(PreprocessSuffix) main.cpp
 
 
--include ../build-$(ConfigurationName)/DataStructure_Project//*$(DependSuffix)
+-include $(IntermediateDirectory)/*$(DependSuffix)
 ##
 ## Clean
 ##
 clean:
-	$(RM) -r $(IntermediateDirectory)
+	$(RM) -r $(ConfigurationName)/
 
 
