@@ -1479,9 +1479,9 @@ class Queue_array
 public:
     void X()
     {
-        for(int i=0;i<30;i++)
-            cout<<"*-*";
-        cout<<endl;
+        for(int i = 0; i < 30; i++)
+            cout << "*-*";
+        cout << endl;
     }
     Queue_array()
     {
@@ -1510,7 +1510,7 @@ public:
     void enQueue(int value)
     {
         if(isFull()) {
-            cout  << "Queue is full!!"<< endl;
+            cout << "Queue is full!!" << endl;
             X();
         } else {
             if(front == -1)
@@ -1543,12 +1543,11 @@ public:
         if(isEmpty()) {
             cout << endl << "Queue is Empty!!" << endl;
             X();
-        } 
-        else {
-           cout<<"\nData in Queue : >"<<endl;
+        } else {
+            cout << "\nData in Queue : >" << endl;
             for(int i = front; i <= rear; i++)
                 cout << myqueue[i] << "\t";
-            cout<<endl;
+            cout << endl;
             X();
         }
     }
@@ -1563,56 +1562,46 @@ public:
     }
     void checkEmpty()
     {
-        if(isEmpty())
-        {
-            cout<<"\nQueue is Empty"<<endl;
+        if(isEmpty()) {
+            cout << "\nQueue is Empty" << endl;
             X();
-        }
-        else
-        {
-            cout<<"\nQueue is NOt Empty"<<endl;
-            X(); 
+        } else {
+            cout << "\nQueue is NOt Empty" << endl;
+            X();
         }
     }
     void checkfull()
     {
-        if(isFull())
-        {
-            cout<<"\nQueue is Full"<<endl;
+        if(isFull()) {
+            cout << "\nQueue is Full" << endl;
             X();
-        }
-        else
-        {
-            cout<<"\nQueue is NOt Full"<<endl;
-            X(); 
+        } else {
+            cout << "\nQueue is NOt Full" << endl;
+            X();
         }
     }
     void Display_qsize()
     {
-        if(isEmpty())
-        {
-            cout<<"\nQueue is Empty"<<endl;
+        if(isEmpty()) {
+            cout << "\nQueue is Empty" << endl;
             return;
             X();
         }
-        cout<<"\nSize of Queue :> "<<(rear-front)+1<<endl;
+        cout << "\nSize of Queue :> " << (rear - front) + 1 << endl;
         X();
     }
     void Reverse_Queue()
     {
-        if(isEmpty())
-        {
-            cout<<"\nQueue is Empty"<<endl;
+        if(isEmpty()) {
+            cout << "\nQueue is Empty" << endl;
             X();
         }
         Stack_array s;
-        while(!isEmpty())
-        {
-           s.push(myqueue[front]);
-           deQueue();
+        while(!isEmpty()) {
+            s.push(myqueue[front]);
+            deQueue();
         }
-        while(!s.isEmpty())
-        {
+        while(!s.isEmpty()) {
             enQueue(s.stackTop());
             s.pop();
         }
@@ -1647,21 +1636,23 @@ public:
                 cout << "\nEnter data to insert :> ";
                 cin >> val;
                 enQueue(val);
-                cout<<"\nData inserted in Queue"<<endl;
+                cout << "\nData inserted in Queue" << endl;
                 X();
                 break;
             case 2:
                 val = deQueue();
-                if(val == -1)return;
+                if(val == -1)
+                    return;
                 cout << "\n " << val << " deleted from Stack" << endl;
                 X();
                 break;
             case 3:
-               displayQueue();
+                displayQueue();
                 break;
             case 4:
-                if(Getfront()==-1)return;
-                cout<<"\nData in front of queue :> "<<Getfront()<<endl;
+                if(Getfront() == -1)
+                    return;
+                cout << "\nData in front of queue :> " << Getfront() << endl;
                 X();
                 break;
             case 5:
@@ -1686,110 +1677,119 @@ public:
 };
 class Queuelist
 {
-    LNode *front;
-    LNode *rear;
-    public:
+    LNode* front;
+    LNode* rear;
+
+public:
     void X()
     {
-        for(int i=0;i<30;i++)
-            cout<<"*-*";
-        cout<<endl;
+        for(int i = 0; i < 30; i++)
+            cout << "*-*";
+        cout << endl;
     }
-    Queuelist(){
-        front=rear=NULL;
+    Queuelist()
+    {
+        front = rear = NULL;
     }
-    
-    bool isempty(){
-        if(front==NULL){
+
+    bool isempty()
+    {
+        if(front == NULL) {
             return true;
         }
         return false;
     }
-    
-    void enqueue(int x){
-       
-        LNode *new_node=new LNode(x);
-        if(isempty()){
-            front=rear=new_node;
+
+    void enqueue(int x)
+    {
+
+        LNode* new_node = new LNode(x);
+        if(isempty()) {
+            front = rear = new_node;
             return;
         }
-        rear->next=new_node;
-        rear=new_node;
+        rear->next = new_node;
+        rear = new_node;
     }
-    
-   int dequeue(){
-       int val;
-        if(isempty()){
-            cout << "Queue is empty" <<endl;
+
+    int dequeue()
+    {
+        int val;
+        if(isempty()) {
+            cout << "Queue is empty" << endl;
             X();
             return -1;
         }
-        if(front==rear){
-            val=front->data;
-            front=rear=NULL;
-            return val ;
+        if(front == rear) {
+            val = front->data;
+            front = rear = NULL;
+            return val;
         }
-       
-        LNode* temp=front;
-        val=temp->data;
-        front=front->next;
+
+        LNode* temp = front;
+        val = temp->data;
+        front = front->next;
         delete temp;
         return val;
     }
-    
-    void display(){
-        if(isempty()){
-            cout << "Queue Is Empty" <<endl;
+
+    void display()
+    {
+        if(isempty()) {
+            cout << "Queue Is Empty" << endl;
             return;
         }
-        
-        LNode *temp=front;
-        cout<<"\nData in Queue :> ";
-        while(temp!=NULL){
+
+        LNode* temp = front;
+        cout << "\nData in Queue :> ";
+        while(temp != NULL) {
             cout << temp->data << " ";
-            temp=temp->next;
+            temp = temp->next;
         }
         cout << endl;
         X();
     }
-    
-    int get_front(){
-        return (isempty())?-1:front->data;
+
+    int get_front()
+    {
+        return (isempty()) ? -1 : front->data;
     }
-    
-    void get_size(){
-        if(isempty()){
-            cout << "Queue Is Empty" <<endl;X();
+
+    void get_size()
+    {
+        if(isempty()) {
+            cout << "Queue Is Empty" << endl;
+            X();
             return;
         }
-        LNode *temp=front;
-        int count=0;
-        while(temp!=NULL){
+        LNode* temp = front;
+        int count = 0;
+        while(temp != NULL) {
             count++;
-            temp=temp->next;
+            temp = temp->next;
         }
-        cout << "Queue Contains " << count << " elements" <<endl;
+        cout << "Queue Contains " << count << " elements" << endl;
         X();
     }
-    
-    void reverse(){
-        if(isempty())
-        {
-            cout<<"\nQueue is Empty"<<endl;
+
+    void reverse()
+    {
+        if(isempty()) {
+            cout << "\nQueue is Empty" << endl;
             X();
             return;
         }
         Stack_LL sl;
-        
-        while(!isempty()){
+
+        while(!isempty()) {
             sl.push(get_front());
             dequeue();
         }
-        while(!sl.isEmpty()){
+        while(!sl.isEmpty()) {
             enqueue(sl.peek());
             sl.pop();
         }
-         cout<<"\nQueue Reversed"<<endl;
+        cout << "\nQueue Reversed" << endl;
         X();
     }
     void MyQueue_LL()
@@ -1821,34 +1821,33 @@ class Queuelist
                 cout << "\nEnter data to insert :> ";
                 cin >> val;
                 enqueue(val);
-                cout<<"\nData inserted in Queue"<<endl;
+                cout << "\nData inserted in Queue" << endl;
                 X();
                 break;
             case 2:
                 dequeue();
-                if(val == -1)return;
+                if(val == -1)
+                    return;
                 cout << "\n " << val << " deleted from Queue" << endl;
                 X();
                 break;
             case 3:
-                    if(get_front()==-1){
-                        cout << "The Queue Is Empty" <<endl;
-                        X();
-                    }else{
-                        cout << "The Front Element in Queue Is  :"<< get_front()<<endl;
-                        X();
-                    }
-
+                if(get_front() == -1) {
+                    cout << "The Queue Is Empty" << endl;
+                    X();
+                } else {
+                    cout << "The Front Element in Queue Is  :" << get_front() << endl;
+                    X();
+                }
                 break;
             case 4:
-                if(isempty()){
-                        cout << "Queue Is Empty" <<endl;
-                        X();
-                    }
-                    else{
-                        cout << "Queue Is Not Empty" <<endl;
-                        X();
-                    }
+                if(isempty()) {
+                    cout << "Queue Is Empty" << endl;
+                    X();
+                } else {
+                    cout << "Queue Is Not Empty" << endl;
+                    X();
+                }
                 break;
             case 5:
                 get_size();
@@ -1867,21 +1866,781 @@ class Queuelist
         }
     }
 };
+class Queue:public Queue_array,public Queuelist
+{
+public:
+    void MyQueue()
+    {
+        int choice;
+        cout << "  -------------------------------------------------------" << endl;
+        cout << " |                          QUEUE                        |" << endl;
+        cout << "  -------------------------------------------------------" << endl << endl;
+
+        while(1) {
+            cout << endl;
+            cout << "    X----------Various implementation of Queue-----------X" << endl << endl;
+
+            cout << "\t*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*" << endl;
+            cout << "\t|   1.Queue using Array           |" << endl;
+            cout << "\t*   2.Queue using Linked List     *" << endl;
+            cout << "\t|   3.Back                        |" << endl;
+            cout << "\t*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*" << endl;
+            cout<<endl;
+            cout << "\nEnter your choice :> ";
+            cin >> choice;
+            switch(choice) {
+            case 1: {
+                MyQueue_array();
+            } break;
+            case 2: {
+                MyQueue_LL();
+            } break;
+            case 3:
+                return;
+            default:
+                cout << "\nWrong choice" << endl;
+            }
+        }
+    }
+};
+class BST
+{
+    struct Node{
+    int data;
+    Node *left;
+    Node *right;
+    Node(int x)
+    {
+        data=x;
+        left=right=nullptr;
+    }
+    };
+    
+    Node *root;
+    
+public:
+    
+    BST()
+    {
+        root=nullptr;
+    }
+    
+    void X()
+    {
+        for(int i=0;i<30;i++)
+            cout<<"*-*";
+        cout<<endl;
+    }
+   
+    Node * insert(Node *b,int x)
+    {
+        if(b==nullptr)
+            return new Node(x);
+        if(b->data>x)
+            b->left=insert(b->left,x);
+        if(b->data<x)
+            b->right=insert(b->right,x);
+        return b;
+    }
+   
+    void inorder(Node *b)
+    {
+        if(b==nullptr)
+            return;
+        inorder(b->left);
+        cout<<" "<<b->data<<" ";
+        inorder(b->right);
+    }
+   
+    void preorder(Node *b)
+    {
+        if(b==nullptr)
+            return;
+        cout<<" "<<b->data<<" ";
+        preorder(b->left);
+        preorder(b->right);
+    }
+   
+    void postorder(Node *b)
+    {
+        if(b==nullptr)
+            return;
+        postorder(b->left);
+        postorder(b->right);
+        cout<<" "<<b->data<<" ";
+    }
+    
+    bool search(Node *b,int x)
+    {
+        if(b==nullptr)
+            return false;
+        if(b->data==x)
+            return true;
+        if(b->data>x)
+            return search(b->left,x);
+        if(b->data<x)
+            return search(b->right,x);
+        return false;
+    }
+    
+    int findMax(Node *b)
+    {
+        if(b==nullptr)
+            return -1;
+        else if(b->right==nullptr)
+            return b->data;
+        else
+            return findMax(b->right);
+    }
+    
+    int findMin(Node *b)
+    {
+        if(b==nullptr)
+            return -1;
+        else if(b->left==nullptr)
+            return b->data;
+        else
+            return findMax(b->left);
+    }
+    
+    Node* Delete(int x, Node* b) {
+        
+        Node* temp;
+        if(b == NULL)
+            return NULL;
+        else if(x < b->data)
+            b->left = Delete(x, b->left);
+        else if(x > b->data)
+            b->right = Delete(x, b->right);
+        else if(b->left && b->right)
+        {
+            temp =new Node(findMin(b->right));
+            b->data = temp->data;
+            b->right = Delete(b->data, b->right);
+        }
+        else
+        {
+            temp = b;
+            if(b->left == NULL)
+                b = b->right;
+            else if(b->right == NULL)
+                b = b->left;
+            delete temp;
+        }
+        return b;
+    }
+    
+    void search(int x)
+    {
+        if(search(root,x))
+        {
+            cout<<"\nData found in Tree"<<endl;
+            X();
+        }
+        else
+        {
+            cout<<"\nData Not found in Tree"<<endl;
+            X();
+        }
+    }
+    
+    void Delete(int x)
+    {
+        if(root==nullptr)
+        {
+            cout<<"\nTree is Empty"<<endl;
+            X();
+        }
+       else if(!search(root,x))
+        {
+            cout<<"\nData not found in Tree"<<endl;
+            X();
+        }
+        else
+        {   root=Delete(x,root);
+            cout<<"\nData deleted from Tree"<<endl;
+            X();
+           
+        }
+    }
+    
+    void MyBST()
+    {
+        int choice, val;
+        cout << "  -------------------------------------------------------" << endl;
+        cout << " |                  BINARY SEARCH TREE                   |" << endl;
+        cout << "  -------------------------------------------------------" << endl << endl;
+
+        while(1) 
+        {
+            cout << endl;
+            cout << "    X-------Various operations on BST-------X" << endl << endl;
+
+            cout << "\t*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*" << endl;
+            cout << "\t|                             |" << endl;
+            cout << "\t*   1.Insert in Tree          *" << endl;
+            cout << "\t|   2.Inorder Traversal       |" << endl;
+            cout << "\t|   3.Preorder Traversal      |" << endl;
+            cout << "\t*   4.Postorder Traversal     *" << endl;
+            cout << "\t|   5.Search data in Tree     *" << endl;
+            cout << "\t|   6.Find Maximum Data       |" << endl;
+            cout << "\t*   7.Find Minimum Data       *" << endl;
+            cout << "\t|   8.Delete Data             |" << endl;
+            cout << "\t*   9.Back                    |" <<endl;
+            cout << "\t*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*" << endl;
+            cout << "\nEnter your choice :> ";
+            cin >> choice;
+            switch(choice) {
+            case 1:
+                cout << "\nEnter data to insert :> ";
+                cin >> val;
+                root=insert(root,val);
+                cout<<"\nData inserted in Tree"<<endl;
+                X();
+                break;
+            case 2:
+                cout<<"\nData in Inorder Traversal :> ";
+                inorder(root);
+                cout<<endl;
+                X();
+                break;
+            case 3:
+                cout<<"\nData in Preorder Traversal :> ";
+                preorder(root);
+                cout<<endl;
+                X();
+
+                break;
+            case 4:
+                cout<<"\nData in Postorder Traversal :> ";
+                postorder(root);
+                cout<<endl;
+                X();
+                break;
+            case 5:
+                cout<<"\nEnter data to Search :> ";
+                cin>>val;
+                search(val);
+                break;
+            case 6:
+                val=findMax(root);
+                if(val==-1){
+                    cout<<"\nTree is Empty"<<endl;
+                    X();
+                }
+                else
+                {
+                    cout<<"\nMaximum data in tree:> "<<val<<endl;
+                    X();
+                }
+                break;
+            case 7:
+                val=findMin(root);
+                if(val==-1){
+                    cout<<"\nTree is Empty"<<endl;
+                    X();
+                }
+                else
+                {
+                    cout<<"\nMinimum data in tree:> "<<val<<endl;
+                    X();
+                }
+                break;
+            case 8:
+                cout << "\nEnter data to Delete :> ";
+                cin >> val;
+                Delete(val);
+                break;
+            case 9:
+                return;
+            default:
+                cout << "\nWrong choice" << endl;
+            }
+        }
+   
+    }
+};
+class minHeap
+{
+    int* harray;
+    int maxcap;
+    int current;
+    void swap(int* x, int* y)
+    {
+        int temp = *x;
+        *x = *y;
+        *y = temp;
+    }
+    int parent(int i)
+    {
+        return i / 2;
+    }
+    int left(int i)
+    {
+        return 2 * i;
+    }
+    int right(int i)
+    {
+        return 2 * i + 1;
+    }
+    int deletemin()
+    {
+        if(current < 1)
+            return -1;
+        if(current == 1) {
+            int k = harray[current];
+            current--;
+            return k;
+        }
+        int val = harray[1];
+        harray[1] = harray[current];
+        current--;
+        minHeapyfiy(1);
+        return val;
+    }
+    int getmin()
+    {
+        return harray[1];
+    }
+    void deletekey(int key)
+    {
+        if(current<1)
+        {
+            cout<<"\nHeap is Empty"<<endl;
+            X();
+            return;
+        }
+        if(!search(key))
+        {
+            cout<<"\nData not found in Heap"<<endl;
+            X();
+            return;
+        }
+        int i;
+        for(int j = 1; j <= current; j++)
+            if(harray[j] == key) {
+                i = j;
+                break;
+            }
+        harray[i] = -1;
+        while(i != 1 and harray[parent(i)] > harray[i]) {
+            swap(&harray[i], &harray[parent(i)]);
+            i = parent(i);
+        }
+        deletemin();
+    }
+    void insertkey(int key)
+    {
+        if(maxcap < current) {
+            cout << "\n Overflow : could not insert key " << endl;
+            X();
+            return;
+        }
+        current++;
+        int i = current;
+        harray[i] = key;
+        while(i != 1 and harray[parent(i)] > harray[i]) {
+            swap(&harray[i], &harray[parent(i)]);
+            i = parent(i);
+        }
+    }
+    void minHeapyfiy(int i)
+    {
+        int l = left(i);
+        int r = right(i);
+        int smallest = i;
+        if(harray[l] < harray[r]){
+            if(l < current and harray[l] < harray[i])
+                smallest = l;
+            else if(r < current and harray[r] < harray[i])
+                smallest = r;
+        }
+        if(smallest != i) {
+            swap(&harray[i], &harray[smallest]);
+            minHeapyfiy(smallest);
+        }
+    }
+    void displayHeap()
+    {
+        cout << "\nElements in MinHeap:> " << endl;
+        for(int i = 1; i <= current; i++)
+            cout << " " << harray[i] << " ";
+        cout<<endl;
+        X();
+    }
+    void X()
+    {
+        for(int i=0;i<30;i++)
+            cout<<"*-*";
+        cout<<endl;
+    }
+    bool search(int x)
+    {
+        if(*find(harray,harray+current,x)<current)
+            return true;
+        return false;
+    }
+public:
+    minHeap()
+    {
+        current = 0;
+        maxcap = 100;
+        harray = new int[maxcap];
+    }
+    void MyMinHeap()
+    {
+        int choice, val;
+        cout << "  -------------------------------------------------------" << endl;
+        cout << " |                      MIN-HEAP                         |" << endl;
+        cout << "  -------------------------------------------------------" << endl << endl;
+
+        while(1) {
+            cout << endl;
+            cout << "    X---------Various operations on Min-Heap---------X" << endl << endl;
+
+            cout << "\t*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*" << endl;
+            cout << "\t|                               |" << endl;
+            cout << "\t*   1.Insert data in Heap       *" << endl;
+            cout << "\t|   2.Display data in Heap      |" << endl;
+            cout << "\t|   3.Delete data from Heap     |" << endl;
+            cout << "\t*   4.Delete Minimum from Heap  *" << endl;
+            cout << "\t|   5.Display minimum in Heap   *" << endl;
+            cout << "\t|   6.Back                      |" << endl;
+            cout << "\t*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*" << endl;
+            cout << "\nEnter your choice :> ";
+            cin >> choice;
+            switch(choice) {
+            case 1:
+                cout << "\nEnter data to insert :> ";
+                cin >> val;
+                insertkey(val);
+                cout << "\nData inserted in Heap" << endl;
+                X();
+                break;
+            case 2:
+                if(current<1)
+                {
+                    cout<<"\nHeap is empty"<<endl;
+                    X();
+                    return;
+                }
+                displayHeap();
+                break;
+            case 3:
+                if(current<1)
+                {
+                    cout<<"\nHeap is empty"<<endl;
+                    X();
+                    return;
+                }
+                cout<<"\nEnter data to delete :> ";
+                cin>>val;
+                deletekey(val);
+                cout<<"\nData Deleted from Heap"<<endl;
+                X();
+                break;
+            case 4:
+                if(current<1)
+                {
+                    cout<<"\nHeap is empty"<<endl;
+                    X();
+                    return;
+                }
+                deletemin();
+                cout<<"\nMinimum data deleted from Heap:"<<endl;
+                X();
+                break;
+            case 5:
+                if(current<1)
+                {
+                    cout<<"\nHeap is empty"<<endl;
+                    X();
+                    return;
+                }
+                cout<<"\nMinimum in Hea: >"<<getmin()<<endl;
+                X();
+                break;
+            case 6:
+                return;
+            default:
+                cout << "\nWrong choice" << endl;
+            }
+        }
+    }
+};
+class maxHeap
+{
+    int* harray;
+    int maxcap;
+    int current;
+
+    void swap(int* x, int* y)
+    {
+        int temp = *x;
+        *x = *y;
+        *y = temp;
+    }
+    int parent(int i)
+    {
+        return i / 2;
+    }
+    int left(int i)
+    {
+        return 2 * i;
+    }
+    int right(int i)
+    {
+        return 2 * i + 1;
+    }
+    int getmax()
+    {
+        return harray[1];
+    }
+    void maxHeapyfy(int i)
+    {
+        int l = left(i);
+        int r = right(i);
+        int greatest = i;
+        if(harray[l] > harray[r])
+            if(l < current and harray[l] > harray[i])
+                greatest = l;
+        if(harray[r] > harray[l])
+            if(r < current and harray[r] > harray[i])
+                greatest = r;
+
+        if(greatest != i) {
+            swap(&harray[i], &harray[greatest]);
+            maxHeapyfy(greatest);
+        }
+    }
+    void insert(int key)
+    {
+        if(maxcap < current) {
+            cout << "\nCouldn't insert key in heap" << endl;
+            X();
+            return;
+        }
+        current++;
+        int i = current;
+        harray[i] = key;
+
+        while(i != 1 and harray[parent(i)] < harray[i]) {
+            swap(&harray[i], &harray[parent(i)]);
+            i = parent(i);
+        }
+    }
+    int deletemax()
+    {
+        if(current < 1) {
+            cout << "Heap is Empty" << endl;
+            X();
+            return -1;
+        }
+        if(current == 1) {
+            int val = harray[current];
+            current--;
+            return val;
+        }
+        int val = harray[1];
+        harray[1] = harray[current];
+        current--;
+        maxHeapyfy(1);
+        return val;
+    }
+    void Delete(int key)
+    {
+        if(current<1)
+        {
+            cout<<"\nHeap is Empty"<<endl;
+            X();
+            return;
+        }
+        if(!search(key))
+        {
+            cout<<"\nData not found in heap"<<endl;
+            X();
+            return;
+        }
+        int i;
+        for(int j = 1; j <= current; j++) {
+            if(harray[j] == key) {
+                i = j;
+                break;
+            }
+        }
+        harray[i] = INT_MAX;
+        while(i != 1 and harray[parent(i)] < harray[i]) {
+            swap(&harray[i], &harray[parent(i)]);
+            i = parent(i);
+        }
+        deletemax();
+    }
+    void displayHeap()
+    {
+        cout << "\nData in heap:> " << endl;
+        for(int i = 1; i <= current; i++) {
+            cout << harray[i] << " ";
+        }
+        cout<<endl;
+        X();
+    }
+    void X()
+    {
+        for(int i=0;i<30;i++)
+            cout<<"*-*";
+        cout<<endl;
+    }
+    bool search(int x)
+    {
+        if(*find(harray,harray+current,x)<current)
+            return true;
+        return false;
+    }
+public:
+    maxHeap()
+    {
+        current = 0;
+        maxcap = 500;
+        harray = new int[maxcap];
+    }
+    void MyMaxHeap()
+    {
+        int choice, val;
+        cout << "  -------------------------------------------------------" << endl;
+        cout << " |                      MAX-HEAP                         |" << endl;
+        cout << "  -------------------------------------------------------" << endl << endl;
+
+        while(1) {
+            cout << endl;
+            cout << "    X---------Various operations on Max-Heap---------X" << endl << endl;
+
+            cout << "\t*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*" << endl;
+            cout << "\t|                               |" << endl;
+            cout << "\t*   1.Insert data in Heap       *" << endl;
+            cout << "\t|   2.Display data in Heap      |" << endl;
+            cout << "\t|   3.Delete data from Heap     |" << endl;
+            cout << "\t*   4.Delete Maximum from Heap  *" << endl;
+            cout << "\t|   5.Display Maximum in Heap   *" << endl;
+            cout << "\t|   6.Back                      |" << endl;
+            cout << "\t*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*" << endl;
+            cout << "\nEnter your choice :> ";
+            cin >> choice;
+            switch(choice) {
+            case 1:
+                cout << "\nEnter data to insert :> ";
+                cin >> val;
+                insert(val);
+                cout << "\nData inserted in Heap" << endl;
+                X();
+                break;
+            case 2:
+                if(current<1)
+                {
+                    cout<<"\nHeap is empty"<<endl;
+                    X();
+                    return;
+                }
+                displayHeap();
+                break;
+            case 3:
+                if(current<1)
+                {
+                    cout<<"\nHeap is empty"<<endl;
+                    X();
+                    return;
+                }
+                cout<<"\nEnter data to delete :> ";
+                cin>>val;
+                Delete(val);
+                cout<<"\nData Deleted from Heap"<<endl;
+                X();
+                break;
+            case 4:
+                if(current<1)
+                {
+                    cout<<"\nHeap is empty"<<endl;
+                    X();
+                    return;
+                }
+                deletemax();
+                cout<<"\nMaximum data deleted from Heap:"<<endl;
+                X();
+                break;
+            case 5:
+                if(current<1)
+                {
+                    cout<<"\nHeap is empty"<<endl;
+                    X();
+                    return;
+                }
+                cout<<"\nMaximium in Heap: >"<<getmax()<<endl;
+                X();
+                break;
+            case 6:
+                return;
+            default:
+                cout << "\nWrong choice" << endl;
+            }
+        }
+    }
+};
+class Heap : public minHeap,public maxHeap
+{
+public:
+    void MyHeap()
+    {
+        int choice;
+        cout << "  ------------------------------------------------------" << endl;
+        cout << " |                          HEAP                        |" << endl;
+        cout << "  ------------------------------------------------------" << endl << endl;
+
+        while(1) {
+            cout << endl;
+            cout << "    X-----Various implementation of Heap-----X" << endl << endl;
+
+            cout << "\t*-*-*-*-*-*-*-*-* " << endl;
+            cout << "\t|   1.MAX-HEAP  |" << endl;
+            cout << "\t*   2.MIN-HEAP  *" << endl;
+            cout << "\t|   3.Back      |" << endl;
+            cout << "\t*-*-*-*-*-*-*-*-*" << endl;
+            cout<<endl;
+            cout << "\nEnter your choice :> ";
+            cin >> choice;
+            switch(choice) {
+            case 1: {
+                MyMaxHeap();
+            } break;
+            case 2: {
+                MyMinHeap();
+            } break;
+            case 3:
+                return;
+            default:
+                cout << "\nWrong choice" << endl;
+            }
+        }
+    }
+};
 int main()
 {
     int choice;
     while(1) {
         cout << endl;
-        cout << "\t --------------------------------------------------------" << endl;
-        cout << "\t|       Implementation of various Data structures         |" << endl;
-        cout << "\t --------------------------------------------------------" << endl << endl;
+        cout << "\t ----------------------------------------------------" << endl;
+        cout << "\t|     Implementation of various Data structures      |" << endl;
+        cout << "\t ----------------------------------------------------" << endl << endl;
         cout << "\t\t*-*-*-*-*-*-*-*-*-*-*-*-*-*-*" << endl;
         cout << "\t\t|   1.Array                 |" << endl;
         cout << "\t\t*   2.Linked List           *" << endl;
         cout << "\t\t|   3.Stack                 |" << endl;
-        cout << "\t\t*   4.Exit                  *" << endl;
+        cout << "\t\t*   4.Queue                 *" << endl;
+        cout << "\t\t|   5.Binary Search Tree    |" << endl;
+        cout << "\t\t*   6.Heap                  *" << endl;
+        cout << "\t\t|   7.Exit                  |" << endl;
+        cout << "\t\t*                           *" << endl;
+        cout << "\t\t|                           |" << endl;
+        cout << "\t\t*                           *" << endl;
         cout << "\t\t*-*-*-*-*-*-*-*-*-*-*-*-*-*-*" << endl;
-        cout<<"5.queue"<<endl<<"6.Queue list"<<endl;
         cout << endl;
         cout << "Enter your choice:-> ";
         cin >> choice;
@@ -1899,24 +2658,24 @@ int main()
             s.MyStack();
         } break;
         case 4:
-            exit(0);
+        {
+            Queue q;
+            q.MyQueue();
+        } break;
         case 5:
-            {
-                Queue_array q;
-                q.MyQueue_array();
-            }
-                break;
+        {
+            BST b;
+            b.MyBST();
+        } break;
         case 6:
-            {
-                Queuelist q;
-                q.MyQueue_LL();
-            }
-                break;
+        {
+            Heap h;
+            h.MyHeap();
+        } break;
+        case 7:
+            exit(0);
         default:
             cout << "\nWrong choice " << endl;
         }
     }
 }
-
-
-
