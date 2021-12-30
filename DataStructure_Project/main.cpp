@@ -1866,7 +1866,7 @@ public:
         }
     }
 };
-class Queue:public Queue_array,public Queuelist
+class Queue : public Queue_array, public Queuelist
 {
 public:
     void MyQueue()
@@ -1885,7 +1885,7 @@ public:
             cout << "\t*   2.Queue using Linked List     *" << endl;
             cout << "\t|   3.Back                        |" << endl;
             cout << "\t*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*" << endl;
-            cout<<endl;
+            cout << endl;
             cout << "\nEnter your choice :> ";
             cin >> choice;
             switch(choice) {
@@ -1905,106 +1905,106 @@ public:
 };
 class BST
 {
-    struct Node{
-    int data;
-    Node *left;
-    Node *right;
-    Node(int x)
-    {
-        data=x;
-        left=right=nullptr;
-    }
+    struct Node {
+        int data;
+        Node* left;
+        Node* right;
+        Node(int x)
+        {
+            data = x;
+            left = right = nullptr;
+        }
     };
-    
-    Node *root;
-    
+
+    Node* root;
+
 public:
-    
     BST()
     {
-        root=nullptr;
+        root = nullptr;
     }
-    
+
     void X()
     {
-        for(int i=0;i<30;i++)
-            cout<<"*-*";
-        cout<<endl;
+        for(int i = 0; i < 30; i++)
+            cout << "*-*";
+        cout << endl;
     }
-   
-    Node * insert(Node *b,int x)
+
+    Node* insert(Node* b, int x)
     {
-        if(b==nullptr)
+        if(b == nullptr)
             return new Node(x);
-        if(b->data>x)
-            b->left=insert(b->left,x);
-        if(b->data<x)
-            b->right=insert(b->right,x);
+        if(b->data > x)
+            b->left = insert(b->left, x);
+        if(b->data < x)
+            b->right = insert(b->right, x);
         return b;
     }
-   
-    void inorder(Node *b)
+
+    void inorder(Node* b)
     {
-        if(b==nullptr)
+        if(b == nullptr)
             return;
         inorder(b->left);
-        cout<<" "<<b->data<<" ";
+        cout << " " << b->data << " ";
         inorder(b->right);
     }
-   
-    void preorder(Node *b)
+
+    void preorder(Node* b)
     {
-        if(b==nullptr)
+        if(b == nullptr)
             return;
-        cout<<" "<<b->data<<" ";
+        cout << " " << b->data << " ";
         preorder(b->left);
         preorder(b->right);
     }
-   
-    void postorder(Node *b)
+
+    void postorder(Node* b)
     {
-        if(b==nullptr)
+        if(b == nullptr)
             return;
         postorder(b->left);
         postorder(b->right);
-        cout<<" "<<b->data<<" ";
+        cout << " " << b->data << " ";
     }
-    
-    bool search(Node *b,int x)
+
+    bool search(Node* b, int x)
     {
-        if(b==nullptr)
+        if(b == nullptr)
             return false;
-        if(b->data==x)
+        if(b->data == x)
             return true;
-        if(b->data>x)
-            return search(b->left,x);
-        if(b->data<x)
-            return search(b->right,x);
+        if(b->data > x)
+            return search(b->left, x);
+        if(b->data < x)
+            return search(b->right, x);
         return false;
     }
-    
-    int findMax(Node *b)
+
+    int findMax(Node* b)
     {
-        if(b==nullptr)
+        if(b == nullptr)
             return -1;
-        else if(b->right==nullptr)
+        else if(b->right == nullptr)
             return b->data;
         else
             return findMax(b->right);
     }
-    
-    int findMin(Node *b)
+
+    int findMin(Node* b)
     {
-        if(b==nullptr)
+        if(b == nullptr)
             return -1;
-        else if(b->left==nullptr)
+        else if(b->left == nullptr)
             return b->data;
         else
             return findMax(b->left);
     }
-    
-    Node* Delete(int x, Node* b) {
-        
+
+    Node* Delete(int x, Node* b)
+    {
+
         Node* temp;
         if(b == NULL)
             return NULL;
@@ -2012,14 +2012,11 @@ public:
             b->left = Delete(x, b->left);
         else if(x > b->data)
             b->right = Delete(x, b->right);
-        else if(b->left && b->right)
-        {
-            temp =new Node(findMin(b->right));
+        else if(b->left && b->right) {
+            temp = new Node(findMin(b->right));
             b->data = temp->data;
             b->right = Delete(b->data, b->right);
-        }
-        else
-        {
+        } else {
             temp = b;
             if(b->left == NULL)
                 b = b->right;
@@ -2029,41 +2026,33 @@ public:
         }
         return b;
     }
-    
+
     void search(int x)
     {
-        if(search(root,x))
-        {
-            cout<<"\nData found in Tree"<<endl;
+        if(search(root, x)) {
+            cout << "\nData found in Tree" << endl;
             X();
-        }
-        else
-        {
-            cout<<"\nData Not found in Tree"<<endl;
+        } else {
+            cout << "\nData Not found in Tree" << endl;
             X();
         }
     }
-    
+
     void Delete(int x)
     {
-        if(root==nullptr)
-        {
-            cout<<"\nTree is Empty"<<endl;
+        if(root == nullptr) {
+            cout << "\nTree is Empty" << endl;
             X();
-        }
-       else if(!search(root,x))
-        {
-            cout<<"\nData not found in Tree"<<endl;
+        } else if(!search(root, x)) {
+            cout << "\nData not found in Tree" << endl;
             X();
-        }
-        else
-        {   root=Delete(x,root);
-            cout<<"\nData deleted from Tree"<<endl;
+        } else {
+            root = Delete(x, root);
+            cout << "\nData deleted from Tree" << endl;
             X();
-           
         }
     }
-    
+
     void MyBST()
     {
         int choice, val;
@@ -2071,8 +2060,7 @@ public:
         cout << " |                  BINARY SEARCH TREE                   |" << endl;
         cout << "  -------------------------------------------------------" << endl << endl;
 
-        while(1) 
-        {
+        while(1) {
             cout << endl;
             cout << "    X-------Various operations on BST-------X" << endl << endl;
 
@@ -2086,7 +2074,7 @@ public:
             cout << "\t|   6.Find Maximum Data       |" << endl;
             cout << "\t*   7.Find Minimum Data       *" << endl;
             cout << "\t|   8.Delete Data             |" << endl;
-            cout << "\t*   9.Back                    |" <<endl;
+            cout << "\t*   9.Back                    |" << endl;
             cout << "\t*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*" << endl;
             cout << "\nEnter your choice :> ";
             cin >> choice;
@@ -2094,55 +2082,51 @@ public:
             case 1:
                 cout << "\nEnter data to insert :> ";
                 cin >> val;
-                root=insert(root,val);
-                cout<<"\nData inserted in Tree"<<endl;
+                root = insert(root, val);
+                cout << "\nData inserted in Tree" << endl;
                 X();
                 break;
             case 2:
-                cout<<"\nData in Inorder Traversal :> ";
+                cout << "\nData in Inorder Traversal :> ";
                 inorder(root);
-                cout<<endl;
+                cout << endl;
                 X();
                 break;
             case 3:
-                cout<<"\nData in Preorder Traversal :> ";
+                cout << "\nData in Preorder Traversal :> ";
                 preorder(root);
-                cout<<endl;
+                cout << endl;
                 X();
 
                 break;
             case 4:
-                cout<<"\nData in Postorder Traversal :> ";
+                cout << "\nData in Postorder Traversal :> ";
                 postorder(root);
-                cout<<endl;
+                cout << endl;
                 X();
                 break;
             case 5:
-                cout<<"\nEnter data to Search :> ";
-                cin>>val;
+                cout << "\nEnter data to Search :> ";
+                cin >> val;
                 search(val);
                 break;
             case 6:
-                val=findMax(root);
-                if(val==-1){
-                    cout<<"\nTree is Empty"<<endl;
+                val = findMax(root);
+                if(val == -1) {
+                    cout << "\nTree is Empty" << endl;
                     X();
-                }
-                else
-                {
-                    cout<<"\nMaximum data in tree:> "<<val<<endl;
+                } else {
+                    cout << "\nMaximum data in tree:> " << val << endl;
                     X();
                 }
                 break;
             case 7:
-                val=findMin(root);
-                if(val==-1){
-                    cout<<"\nTree is Empty"<<endl;
+                val = findMin(root);
+                if(val == -1) {
+                    cout << "\nTree is Empty" << endl;
                     X();
-                }
-                else
-                {
-                    cout<<"\nMinimum data in tree:> "<<val<<endl;
+                } else {
+                    cout << "\nMinimum data in tree:> " << val << endl;
                     X();
                 }
                 break;
@@ -2157,7 +2141,6 @@ public:
                 cout << "\nWrong choice" << endl;
             }
         }
-   
     }
 };
 class minHeap
@@ -2204,15 +2187,13 @@ class minHeap
     }
     void deletekey(int key)
     {
-        if(current<1)
-        {
-            cout<<"\nHeap is Empty"<<endl;
+        if(current < 1) {
+            cout << "\nHeap is Empty" << endl;
             X();
             return;
         }
-        if(!search(key))
-        {
-            cout<<"\nData not found in Heap"<<endl;
+        if(!search(key)) {
+            cout << "\nData not found in Heap" << endl;
             X();
             return;
         }
@@ -2249,7 +2230,7 @@ class minHeap
         int l = left(i);
         int r = right(i);
         int smallest = i;
-        if(harray[l] < harray[r]){
+        if(harray[l] < harray[r]) {
             if(l < current and harray[l] < harray[i])
                 smallest = l;
             else if(r < current and harray[r] < harray[i])
@@ -2265,21 +2246,22 @@ class minHeap
         cout << "\nElements in MinHeap:> " << endl;
         for(int i = 1; i <= current; i++)
             cout << " " << harray[i] << " ";
-        cout<<endl;
+        cout << endl;
         X();
     }
     void X()
     {
-        for(int i=0;i<30;i++)
-            cout<<"*-*";
-        cout<<endl;
+        for(int i = 0; i < 30; i++)
+            cout << "*-*";
+        cout << endl;
     }
     bool search(int x)
     {
-        if(*find(harray,harray+current,x)<current)
+        if(*find(harray, harray + current, x) < current)
             return true;
         return false;
     }
+
 public:
     minHeap()
     {
@@ -2318,46 +2300,42 @@ public:
                 X();
                 break;
             case 2:
-                if(current<1)
-                {
-                    cout<<"\nHeap is empty"<<endl;
+                if(current < 1) {
+                    cout << "\nHeap is empty" << endl;
                     X();
                     return;
                 }
                 displayHeap();
                 break;
             case 3:
-                if(current<1)
-                {
-                    cout<<"\nHeap is empty"<<endl;
+                if(current < 1) {
+                    cout << "\nHeap is empty" << endl;
                     X();
                     return;
                 }
-                cout<<"\nEnter data to delete :> ";
-                cin>>val;
+                cout << "\nEnter data to delete :> ";
+                cin >> val;
                 deletekey(val);
-                cout<<"\nData Deleted from Heap"<<endl;
+                cout << "\nData Deleted from Heap" << endl;
                 X();
                 break;
             case 4:
-                if(current<1)
-                {
-                    cout<<"\nHeap is empty"<<endl;
+                if(current < 1) {
+                    cout << "\nHeap is empty" << endl;
                     X();
                     return;
                 }
                 deletemin();
-                cout<<"\nMinimum data deleted from Heap:"<<endl;
+                cout << "\nMinimum data deleted from Heap:" << endl;
                 X();
                 break;
             case 5:
-                if(current<1)
-                {
-                    cout<<"\nHeap is empty"<<endl;
+                if(current < 1) {
+                    cout << "\nHeap is empty" << endl;
                     X();
                     return;
                 }
-                cout<<"\nMinimum in Hea: >"<<getmin()<<endl;
+                cout << "\nMinimum in Hea: >" << getmin() << endl;
                 X();
                 break;
             case 6:
@@ -2449,15 +2427,13 @@ class maxHeap
     }
     void Delete(int key)
     {
-        if(current<1)
-        {
-            cout<<"\nHeap is Empty"<<endl;
+        if(current < 1) {
+            cout << "\nHeap is Empty" << endl;
             X();
             return;
         }
-        if(!search(key))
-        {
-            cout<<"\nData not found in heap"<<endl;
+        if(!search(key)) {
+            cout << "\nData not found in heap" << endl;
             X();
             return;
         }
@@ -2481,21 +2457,22 @@ class maxHeap
         for(int i = 1; i <= current; i++) {
             cout << harray[i] << " ";
         }
-        cout<<endl;
+        cout << endl;
         X();
     }
     void X()
     {
-        for(int i=0;i<30;i++)
-            cout<<"*-*";
-        cout<<endl;
+        for(int i = 0; i < 30; i++)
+            cout << "*-*";
+        cout << endl;
     }
     bool search(int x)
     {
-        if(*find(harray,harray+current,x)<current)
+        if(*find(harray, harray + current, x) < current)
             return true;
         return false;
     }
+
 public:
     maxHeap()
     {
@@ -2534,46 +2511,42 @@ public:
                 X();
                 break;
             case 2:
-                if(current<1)
-                {
-                    cout<<"\nHeap is empty"<<endl;
+                if(current < 1) {
+                    cout << "\nHeap is empty" << endl;
                     X();
                     return;
                 }
                 displayHeap();
                 break;
             case 3:
-                if(current<1)
-                {
-                    cout<<"\nHeap is empty"<<endl;
+                if(current < 1) {
+                    cout << "\nHeap is empty" << endl;
                     X();
                     return;
                 }
-                cout<<"\nEnter data to delete :> ";
-                cin>>val;
+                cout << "\nEnter data to delete :> ";
+                cin >> val;
                 Delete(val);
-                cout<<"\nData Deleted from Heap"<<endl;
+                cout << "\nData Deleted from Heap" << endl;
                 X();
                 break;
             case 4:
-                if(current<1)
-                {
-                    cout<<"\nHeap is empty"<<endl;
+                if(current < 1) {
+                    cout << "\nHeap is empty" << endl;
                     X();
                     return;
                 }
                 deletemax();
-                cout<<"\nMaximum data deleted from Heap:"<<endl;
+                cout << "\nMaximum data deleted from Heap:" << endl;
                 X();
                 break;
             case 5:
-                if(current<1)
-                {
-                    cout<<"\nHeap is empty"<<endl;
+                if(current < 1) {
+                    cout << "\nHeap is empty" << endl;
                     X();
                     return;
                 }
-                cout<<"\nMaximium in Heap: >"<<getmax()<<endl;
+                cout << "\nMaximium in Heap: >" << getmax() << endl;
                 X();
                 break;
             case 6:
@@ -2584,7 +2557,7 @@ public:
         }
     }
 };
-class Heap : public minHeap,public maxHeap
+class Heap : public minHeap, public maxHeap
 {
 public:
     void MyHeap()
@@ -2603,7 +2576,7 @@ public:
             cout << "\t*   2.MIN-HEAP  *" << endl;
             cout << "\t|   3.Back      |" << endl;
             cout << "\t*-*-*-*-*-*-*-*-*" << endl;
-            cout<<endl;
+            cout << endl;
             cout << "\nEnter your choice :> ";
             cin >> choice;
             switch(choice) {
@@ -2624,25 +2597,28 @@ public:
 class Graph
 {
     int V;
-    list<int> *l;
+    list<int>* l;
+
 public:
     void X()
     {
-        for(int i=0;i<30;i++)
-            cout<<"*-*";
-        cout<<endl;
+        for(int i = 0; i < 30; i++)
+            cout << "*-*";
+        cout << endl;
     }
-    Graph(){V=0;};
+    Graph()
+    {
+        V = 0;
+    };
     Graph(int n)
     {
-        V=n;
-        l= new list<int>[V];
+        V = n;
+        l = new list<int>[V];
     }
-    void addEdge(int i,int j,bool undir=true)
+    void addEdge(int i, int j, bool undir = true)
     {
         l[i].push_back(j);
-        if(i==j)
-        {
+        if(i == j) {
             l[i].push_back(j);
             return;
         }
@@ -2651,98 +2627,92 @@ public:
     }
     void display_adjList()
     {
-        if(V<0)
-        {
-            cout<<"\nNothing in Graph to display"<<endl;
+        if(V < 0) {
+            cout << "\nNothing in Graph to display" << endl;
             X();
             return;
         }
-        cout<<"\nAdjacency List Representation of Graph :> "<<endl;
-        for(int i=0;i<V;i++)
-        {
-            cout<<"\nVertex "<<i;
-            for(auto x :l[i])
-                cout<<"-->"<<x;
-            cout<<"-->x"<<endl;
+        cout << "\nAdjacency List Representation of Graph :> " << endl;
+        for(int i = 0; i < V; i++) {
+            cout << "\nVertex " << i;
+            for(auto x : l[i])
+                cout << "-->" << x;
+            cout << "-->x" << endl;
         }
-        cout<<endl;
+        cout << endl;
         X();
     }
     void bfs(int source)
     {
-        if(V==0)
-        {
-            cout<<"\nNothing in Graph to Traverse "<<endl;
+        if(V == 0) {
+            cout << "\nNothing in Graph to Traverse " << endl;
             X();
             return;
         }
-        if(!(0<=source and source<V))
-        {
-            cout<<"\nWrong vertex for Traversal"<<endl;
+        if(!(0 <= source and source < V)) {
+            cout << "\nWrong vertex for Traversal" << endl;
             X();
             return;
         }
-        cout<<"\nBreath First Traversal :> "<<endl;
+        cout << "\nBreath First Traversal :> " << endl;
         queue<int> Q;
-        bool *visited =new bool[V];
+        bool* visited = new bool[V];
         Q.push(source);
         visited[source] = true;
-        
-        while(!Q.empty())
-        {
-            int x =Q.front();
-            cout<<" "<<x<<" ";
+
+        while(!Q.empty()) {
+            int x = Q.front();
+            cout << " " << x << " ";
             Q.pop();
-        
-            for(auto nbr: l[x]){
-                if(!visited[nbr]){
+
+            for(auto nbr : l[x]) {
+                if(!visited[nbr]) {
                     Q.push(nbr);
-                    visited[nbr]=true;
+                    visited[nbr] = true;
                 }
             }
         }
-        cout<<endl;
+        cout << endl;
         X();
     }
-    void dfsHelper(int val,bool * visited){
-        visited[val]=true;
-        cout<<" "<<val<<" ";
-        for(int nbr: l[val]){
-            if(!visited[nbr]){
-                dfsHelper(nbr,visited);
+    void dfsHelper(int val, bool* visited)
+    {
+        visited[val] = true;
+        cout << " " << val << " ";
+        for(int nbr : l[val]) {
+            if(!visited[nbr]) {
+                dfsHelper(nbr, visited);
             }
         }
     }
-    void dfs(int source){
-        if(V==0)
-        {
-            cout<<"\nNothing in Graph to Traverse "<<endl;
+    void dfs(int source)
+    {
+        if(V == 0) {
+            cout << "\nNothing in Graph to Traverse " << endl;
             X();
             return;
         }
-        if(!(0<=source and source<V))
-        {
-            cout<<"\nWrong vertex for Traversal"<<endl;
+        if(!(0 <= source and source < V)) {
+            cout << "\nWrong vertex for Traversal" << endl;
             X();
             return;
         }
-        cout<<"\nDepth First Traversal :> "<<endl;
-        bool *visited = new bool[V];
-        dfsHelper(source,visited);
-        cout<<endl;
+        cout << "\nDepth First Traversal :> " << endl;
+        bool* visited = new bool[V];
+        dfsHelper(source, visited);
+        cout << endl;
         X();
     }
     void MyGraph()
     {
-        int choice, val,n;
+        int choice, val, n;
         cout << "  -------------------------------------------------------" << endl;
         cout << " |                        GRAPH                          |" << endl;
         cout << "  -------------------------------------------------------" << endl << endl;
-        cout<<"\nEnter number of vertex in Graph :> ";
-        cin>>n;
+        cout << "\nEnter number of vertex in Graph :> ";
+        cin >> n;
         Graph g(n);
-        while(1) 
-        {
+        while(1) {
             cout << endl;
             cout << "    X----Various operations on Graph----X" << endl << endl;
 
@@ -2757,35 +2727,33 @@ public:
             cout << "\nEnter your choice :> ";
             cin >> choice;
             switch(choice) {
-            case 1:
-            {
-                int a,b;
-                cout<<"\nEnter the vertices in pair to add Edge :> "<<endl;
-                cout<<"*vertices should be in range of [0,n) *"<<endl;
-                cout<<"Example :-> '1 2' for n=3 and directed"<<endl;
-                cout<<"->";
-                cin>>a>>b;
-                if(!(0<=a and a<n)|| !(0<=b and b<n)){
-                    cout<<"\nVertex out of range"<<endl;
+            case 1: {
+                int a, b;
+                cout << "\nEnter the vertices in pair to add Edge :> " << endl;
+                cout << "*vertices should be in range of [0,n) *" << endl;
+                cout << "Example :-> '1 2' for n=3 and directed" << endl;
+                cout << "->";
+                cin >> a >> b;
+                if(!(0 <= a and a < n) || !(0 <= b and b < n)) {
+                    cout << "\nVertex out of range" << endl;
                     X();
                     return;
                 }
-                g.addEdge(a,b);
-                cout<<"Edge is added between Vertices "<<endl;
+                g.addEdge(a, b);
+                cout << "Edge is added between Vertices " << endl;
                 X();
-            }
-                break;
+            } break;
             case 2:
                 g.display_adjList();
                 break;
             case 3:
-                cout<<"\nEnter source vertex for Traversal :> ";
-                cin>>val;
+                cout << "\nEnter source vertex for Traversal :> ";
+                cin >> val;
                 g.dfs(val);
                 break;
             case 4:
-                cout<<"\nEnter source vertex for Traversal :> ";
-                cin>>val;
+                cout << "\nEnter source vertex for Traversal :> ";
+                cin >> val;
                 g.bfs(val);
                 break;
             case 5:
@@ -2832,23 +2800,19 @@ int main()
             Stack s;
             s.MyStack();
         } break;
-        case 4:
-        {
+        case 4: {
             Queue q;
             q.MyQueue();
         } break;
-        case 5:
-        {
+        case 5: {
             BST b;
             b.MyBST();
         } break;
-        case 6:
-        {
+        case 6: {
             Heap h;
             h.MyHeap();
         } break;
-        case 7:
-        {
+        case 7: {
             Graph g;
             g.MyGraph();
         } break;
@@ -2859,3 +2823,4 @@ int main()
         }
     }
 }
+
