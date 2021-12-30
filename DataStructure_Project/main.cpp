@@ -2621,6 +2621,181 @@ public:
         }
     }
 };
+class Graph
+{
+    int V;
+    list<int> *l;
+public:
+    void X()
+    {
+        for(int i=0;i<30;i++)
+            cout<<"*-*";
+        cout<<endl;
+    }
+    Graph(){V=0;};
+    Graph(int n)
+    {
+        V=n;
+        l= new list<int>[V];
+    }
+    void addEdge(int i,int j,bool undir=true)
+    {
+        l[i].push_back(j);
+        if(i==j)
+        {
+            l[i].push_back(j);
+            return;
+        }
+        if(undir)
+            l[j].push_back(i);
+    }
+    void display_adjList()
+    {
+        if(V<0)
+        {
+            cout<<"\nNothing in Graph to display"<<endl;
+            X();
+            return;
+        }
+        cout<<"\nAdjacency List Representation of Graph :> "<<endl;
+        for(int i=0;i<V;i++)
+        {
+            cout<<"\nVertex "<<i;
+            for(auto x :l[i])
+                cout<<"-->"<<x;
+            cout<<"-->x"<<endl;
+        }
+        cout<<endl;
+        X();
+    }
+    void bfs(int source)
+    {
+        if(V==0)
+        {
+            cout<<"\nNothing in Graph to Traverse "<<endl;
+            X();
+            return;
+        }
+        if(!(0<=source and source<V))
+        {
+            cout<<"\nWrong vertex for Traversal"<<endl;
+            X();
+            return;
+        }
+        cout<<"\nBreath First Traversal :> "<<endl;
+        queue<int> Q;
+        bool *visited =new bool[V];
+        Q.push(source);
+        visited[source] = true;
+        
+        while(!Q.empty())
+        {
+            int x =Q.front();
+            cout<<" "<<x<<" ";
+            Q.pop();
+        
+            for(auto nbr: l[x]){
+                if(!visited[nbr]){
+                    Q.push(nbr);
+                    visited[nbr]=true;
+                }
+            }
+        }
+        cout<<endl;
+        X();
+    }
+    void dfsHelper(int val,bool * visited){
+        visited[val]=true;
+        cout<<" "<<val<<" ";
+        for(int nbr: l[val]){
+            if(!visited[nbr]){
+                dfsHelper(nbr,visited);
+            }
+        }
+    }
+    void dfs(int source){
+        if(V==0)
+        {
+            cout<<"\nNothing in Graph to Traverse "<<endl;
+            X();
+            return;
+        }
+        if(!(0<=source and source<V))
+        {
+            cout<<"\nWrong vertex for Traversal"<<endl;
+            X();
+            return;
+        }
+        cout<<"\nDepth First Traversal :> "<<endl;
+        bool *visited = new bool[V];
+        dfsHelper(source,visited);
+        cout<<endl;
+        X();
+    }
+    void MyGraph()
+    {
+        int choice, val,n;
+        cout << "  -------------------------------------------------------" << endl;
+        cout << " |                        GRAPH                          |" << endl;
+        cout << "  -------------------------------------------------------" << endl << endl;
+        cout<<"\nEnter number of vertex in Graph :> ";
+        cin>>n;
+        Graph g(n);
+        while(1) 
+        {
+            cout << endl;
+            cout << "    X----Various operations on Graph----X" << endl << endl;
+
+            cout << "\t*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*" << endl;
+            cout << "\t|                             |" << endl;
+            cout << "\t*   1.Add Edges               *" << endl;
+            cout << "\t|   2.Print Adjacency List    |" << endl;
+            cout << "\t|   3.Depth First Traversal   *" << endl;
+            cout << "\t*   4.Bredth First Traversal  |" << endl;
+            cout << "\t|   5.Back                    *" << endl;
+            cout << "\t*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*" << endl;
+            cout << "\nEnter your choice :> ";
+            cin >> choice;
+            switch(choice) {
+            case 1:
+            {
+                int a,b;
+                cout<<"\nEnter the vertices in pair to add Edge :> "<<endl;
+                cout<<"*vertices should be in range of [0,n) *"<<endl;
+                cout<<"Example :-> '1 2' for n=3 and directed"<<endl;
+                cout<<"->";
+                cin>>a>>b;
+                if(!(0<=a and a<n)|| !(0<=b and b<n)){
+                    cout<<"\nVertex out of range"<<endl;
+                    X();
+                    return;
+                }
+                g.addEdge(a,b);
+                cout<<"Edge is added between Vertices "<<endl;
+                X();
+            }
+                break;
+            case 2:
+                g.display_adjList();
+                break;
+            case 3:
+                cout<<"\nEnter source vertex for Traversal :> ";
+                cin>>val;
+                g.dfs(val);
+                break;
+            case 4:
+                cout<<"\nEnter source vertex for Traversal :> ";
+                cin>>val;
+                g.bfs(val);
+                break;
+            case 5:
+                return;
+            default:
+                cout << "\nWrong choice" << endl;
+            }
+        }
+    }
+};
 int main()
 {
     int choice;
@@ -2636,8 +2811,8 @@ int main()
         cout << "\t\t*   4.Queue                 *" << endl;
         cout << "\t\t|   5.Binary Search Tree    |" << endl;
         cout << "\t\t*   6.Heap                  *" << endl;
-        cout << "\t\t|   7.Exit                  |" << endl;
-        cout << "\t\t*                           *" << endl;
+        cout << "\t\t|   7.Graph                 |" << endl;
+        cout << "\t\t*   8.Exit                  *" << endl;
         cout << "\t\t|                           |" << endl;
         cout << "\t\t*                           *" << endl;
         cout << "\t\t*-*-*-*-*-*-*-*-*-*-*-*-*-*-*" << endl;
@@ -2673,6 +2848,11 @@ int main()
             h.MyHeap();
         } break;
         case 7:
+        {
+            Graph g;
+            g.MyGraph();
+        } break;
+        case 8:
             exit(0);
         default:
             cout << "\nWrong choice " << endl;
