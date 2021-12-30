@@ -1477,7 +1477,13 @@ class Queue_array
     int size;
 
 public:
-    Queue()
+    void X()
+    {
+        for(int i=0;i<30;i++)
+            cout<<"*-*";
+        cout<<endl;
+    }
+    Queue_array()
     {
         front = -1;
         rear = -1;
@@ -1504,13 +1510,13 @@ public:
     void enQueue(int value)
     {
         if(isFull()) {
-            cout << endl << "Queue is full!!";
+            cout  << "Queue is full!!"<< endl;
+            X();
         } else {
             if(front == -1)
                 front = 0;
             rear++;
             myqueue[rear] = value;
-            cout << value << " ";
         }
     }
     int deQueue()
@@ -1518,6 +1524,7 @@ public:
         int value;
         if(isEmpty()) {
             cout << "Queue is empty!!" << endl;
+            X();
             return (-1);
         } else {
             value = myqueue[front];
@@ -1527,22 +1534,336 @@ public:
             } else {
                 front++;
             }
-            cout << endl << "Deleted => " << value << " from myqueue";
             return (value);
         }
     }
 
     void displayQueue()
     {
-        int i;
         if(isEmpty()) {
             cout << endl << "Queue is Empty!!" << endl;
-        } else {
-            cout << endl << "Front = " << front;
-            cout << endl << "Queue elements : ";
-            for(i = front; i <= rear; i++)
+            X();
+        } 
+        else {
+           cout<<"\nData in Queue : >"<<endl;
+            for(int i = front; i <= rear; i++)
                 cout << myqueue[i] << "\t";
-            cout << endl << "Rear = " << rear << endl;
+            cout<<endl;
+            X();
+        }
+    }
+    int Getfront()
+    {
+        if(isEmpty()) {
+            cout << endl << "Queue is Empty!!" << endl;
+            return -1;
+            X();
+        }
+        return myqueue[front];
+    }
+    void checkEmpty()
+    {
+        if(isEmpty())
+        {
+            cout<<"\nQueue is Empty"<<endl;
+            X();
+        }
+        else
+        {
+            cout<<"\nQueue is NOt Empty"<<endl;
+            X(); 
+        }
+    }
+    void checkfull()
+    {
+        if(isFull())
+        {
+            cout<<"\nQueue is Full"<<endl;
+            X();
+        }
+        else
+        {
+            cout<<"\nQueue is NOt Full"<<endl;
+            X(); 
+        }
+    }
+    void Display_qsize()
+    {
+        if(isEmpty())
+        {
+            cout<<"\nQueue is Empty"<<endl;
+            return;
+            X();
+        }
+        cout<<"\nSize of Queue :> "<<(rear-front)+1<<endl;
+        X();
+    }
+    void Reverse_Queue()
+    {
+        if(isEmpty())
+        {
+            cout<<"\nQueue is Empty"<<endl;
+            X();
+        }
+        Stack_array s;
+        while(!isEmpty())
+        {
+           s.push(myqueue[front]);
+           deQueue();
+        }
+        while(!s.isEmpty())
+        {
+            enQueue(s.stackTop());
+            s.pop();
+        }
+    }
+    void MyQueue_array()
+    {
+        int choice, val;
+        cout << "  -------------------------------------------------------" << endl;
+        cout << " |                  Queue using Array                    |" << endl;
+        cout << "  -------------------------------------------------------" << endl << endl;
+
+        while(1) {
+            cout << endl;
+            cout << "    X---------Various operations on Queue---------X" << endl << endl;
+
+            cout << "\t*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*" << endl;
+            cout << "\t|                               |" << endl;
+            cout << "\t*   1.Enqueue in Queue          *" << endl;
+            cout << "\t|   2.Dequeue in Queue          |" << endl;
+            cout << "\t*   3.Display data in Queue     *" << endl;
+            cout << "\t|   4.Display front of Queue    |" << endl;
+            cout << "\t*   5.Check if Queue is Empty   *" << endl;
+            cout << "\t*   6.Check if Queue is Full    *" << endl;
+            cout << "\t|   7.Reverse Queue             |" << endl;
+            cout << "\t|   8.Display Queue Size        *" << endl;
+            cout << "\t|   9.Back                      |" << endl;
+            cout << "\t*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*" << endl;
+            cout << "\nEnter your choice :> ";
+            cin >> choice;
+            switch(choice) {
+            case 1:
+                cout << "\nEnter data to insert :> ";
+                cin >> val;
+                enQueue(val);
+                cout<<"\nData inserted in Queue"<<endl;
+                X();
+                break;
+            case 2:
+                val = deQueue();
+                if(val == -1)return;
+                cout << "\n " << val << " deleted from Stack" << endl;
+                X();
+                break;
+            case 3:
+               displayQueue();
+                break;
+            case 4:
+                if(Getfront()==-1)return;
+                cout<<"\nData in front of queue :> "<<Getfront()<<endl;
+                X();
+                break;
+            case 5:
+                checkEmpty();
+                break;
+            case 6:
+                checkfull();
+                break;
+            case 7:
+                Reverse_Queue();
+                break;
+            case 8:
+                Display_qsize();
+                break;
+            case 9:
+                return;
+            default:
+                cout << "\nWrong choice" << endl;
+            }
+        }
+    }
+};
+class Queuelist
+{
+    LNode *front;
+    LNode *rear;
+    public:
+    void X()
+    {
+        for(int i=0;i<30;i++)
+            cout<<"*-*";
+        cout<<endl;
+    }
+    Queuelist(){
+        front=rear=NULL;
+    }
+    
+    bool isempty(){
+        if(front==NULL){
+            return true;
+        }
+        return false;
+    }
+    
+    void enqueue(int x){
+       
+        LNode *new_node=new LNode(x);
+        if(isempty()){
+            front=rear=new_node;
+            return;
+        }
+        rear->next=new_node;
+        rear=new_node;
+    }
+    
+   int dequeue(){
+       int val;
+        if(isempty()){
+            cout << "Queue is empty" <<endl;
+            X();
+            return -1;
+        }
+        if(front==rear){
+            val=front->data;
+            front=rear=NULL;
+            return val ;
+        }
+       
+        LNode* temp=front;
+        val=temp->data;
+        front=front->next;
+        delete temp;
+        return val;
+    }
+    
+    void display(){
+        if(isempty()){
+            cout << "Queue Is Empty" <<endl;
+            return;
+        }
+        
+        LNode *temp=front;
+        cout<<"\nData in Queue :> ";
+        while(temp!=NULL){
+            cout << temp->data << " ";
+            temp=temp->next;
+        }
+        cout << endl;
+        X();
+    }
+    
+    int get_front(){
+        return (isempty())?-1:front->data;
+    }
+    
+    void get_size(){
+        if(isempty()){
+            cout << "Queue Is Empty" <<endl;X();
+            return;
+        }
+        LNode *temp=front;
+        int count=0;
+        while(temp!=NULL){
+            count++;
+            temp=temp->next;
+        }
+        cout << "Queue Contains " << count << " elements" <<endl;
+        X();
+    }
+    
+    void reverse(){
+        if(isempty())
+        {
+            cout<<"\nQueue is Empty"<<endl;
+            X();
+            return;
+        }
+        Stack_LL sl;
+        
+        while(!isempty()){
+            sl.push(get_front());
+            dequeue();
+        }
+        while(!sl.isEmpty()){
+            enqueue(sl.peek());
+            sl.pop();
+        }
+         cout<<"\nQueue Reversed"<<endl;
+        X();
+    }
+    void MyQueue_LL()
+    {
+        int choice, val;
+        cout << "  -------------------------------------------------------" << endl;
+        cout << " |             Queue using Linked List                   |" << endl;
+        cout << "  -------------------------------------------------------" << endl << endl;
+
+        while(1) {
+            cout << endl;
+            cout << "    X---------Various operations on Queue---------X" << endl << endl;
+
+            cout << "\t*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*" << endl;
+            cout << "\t|                               |" << endl;
+            cout << "\t*   1.Enqueue in Queue          *" << endl;
+            cout << "\t|   2.Dequeue in Queue          |" << endl;
+            cout << "\t|   3.Display front of Queue    |" << endl;
+            cout << "\t*   4.Check if Queue is Empty   *" << endl;
+            cout << "\t|   5.Display Queue Size        *" << endl;
+            cout << "\t|   6.Reverse Stack             |" << endl;
+            cout << "\t*   7.Display data in Queue     *" << endl;
+            cout << "\t|   8.Back                      |" << endl;
+            cout << "\t*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*" << endl;
+            cout << "\nEnter your choice :> ";
+            cin >> choice;
+            switch(choice) {
+            case 1:
+                cout << "\nEnter data to insert :> ";
+                cin >> val;
+                enqueue(val);
+                cout<<"\nData inserted in Queue"<<endl;
+                X();
+                break;
+            case 2:
+                dequeue();
+                if(val == -1)return;
+                cout << "\n " << val << " deleted from Queue" << endl;
+                X();
+                break;
+            case 3:
+                    if(get_front()==-1){
+                        cout << "The Queue Is Empty" <<endl;
+                        X();
+                    }else{
+                        cout << "The Front Element in Queue Is  :"<< get_front()<<endl;
+                        X();
+                    }
+
+                break;
+            case 4:
+                if(isempty()){
+                        cout << "Queue Is Empty" <<endl;
+                        X();
+                    }
+                    else{
+                        cout << "Queue Is Not Empty" <<endl;
+                        X();
+                    }
+                break;
+            case 5:
+                get_size();
+                break;
+            case 6:
+                reverse();
+                break;
+            case 7:
+                display();
+                break;
+            case 8:
+                return;
+            default:
+                cout << "\nWrong choice" << endl;
+            }
         }
     }
 };
@@ -1560,6 +1881,7 @@ int main()
         cout << "\t\t|   3.Stack                 |" << endl;
         cout << "\t\t*   4.Exit                  *" << endl;
         cout << "\t\t*-*-*-*-*-*-*-*-*-*-*-*-*-*-*" << endl;
+        cout<<"5.queue"<<endl<<"6.Queue list"<<endl;
         cout << endl;
         cout << "Enter your choice:-> ";
         cin >> choice;
@@ -1578,8 +1900,23 @@ int main()
         } break;
         case 4:
             exit(0);
+        case 5:
+            {
+                Queue_array q;
+                q.MyQueue_array();
+            }
+                break;
+        case 6:
+            {
+                Queuelist q;
+                q.MyQueue_LL();
+            }
+                break;
         default:
             cout << "\nWrong choice " << endl;
         }
     }
 }
+
+
+
