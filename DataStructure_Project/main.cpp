@@ -2764,6 +2764,256 @@ public:
         }
     }
 };
+
+class Node {
+public:
+    int id;
+    string Name;
+    string Branch;
+    float cgpa;
+    Node *next;
+    Node(int id,string Name,string Branch,float cgpa) {
+        this->id=id;
+        this->Name=Name;
+        this->Branch= Branch;
+        this->cgpa=cgpa;
+        next=nullptr;
+    }
+    ~Node() {
+        if(next!=nullptr)
+            delete next;
+    }
+};
+
+class studentHash {
+    Node **table;
+    int cs;
+    int ts;
+    int hashfunction(int id) {
+        return (id % ts);
+    } 
+    void rehash() {
+        Node **oldtable = table;
+        int oldts =ts;
+        cs =0;
+        ts = 2*ts;
+        table = new Node *[ts];
+        
+        for(int i=0;i<ts;i++)
+            table[i] = NULL;
+        
+        for(int i=0;i<oldts;i++) {
+            Node * temp = oldtable[i];
+            
+            while(temp!=NULL) {
+                int id = temp->id;
+                string name = temp->Name;
+                string branch = temp->Branch;
+                float cg = temp->cgpa;
+                
+                insert (id,name,branch,cg);
+                temp= temp->next;
+            }
+            if(oldtable[i]!=NULL) 
+                delete oldtable[i];
+        }
+        delete [] oldtable;
+    }
+    void X() {
+        for(int i=0;i<30;i++)
+            cout<<"*-*";
+        cout<<endl;
+    }
+    void insert (int id,string name,string branch,float cg) {
+        int idx =hashfunction(id);
+        Node * newNode = new Node(id,name,branch,cg);
+        newNode->next=table[idx];
+        table[idx]=newNode;
+        
+        cs++;
+        float lf =cs/float(ts);
+        
+        if(lf>0.7)
+            rehash();
+        
+    }
+    bool isPresent(int id) {
+        int idx = hashfunction(id);
+        
+        Node *temp  = table[idx];
+
+        if(temp==nullptr)
+            return false;
+        while(temp!=nullptr){
+            if(temp->id==id)
+                return true;
+          temp=temp->next;
+        }
+        return false;
+    }
+    Node * search(int key) {
+        int idx = hashfunction(key);
+
+        Node *temp=table[idx];
+
+        while(temp!=nullptr){
+            if(temp->id==key)
+                return temp;
+            temp=temp->next;
+       }
+       return nullptr;
+    }
+    void erase(int id)
+    {
+        if(!isPresent(id)) {
+            cout<<"\nData not found"<<endl;
+            X();
+            return;
+        }
+        int idx =hashfunction(id);
+        
+        Node *temp =table[idx];
+        
+        if(temp->next!=NULL and id==temp->id)
+        {
+            Node *to_delete=temp;
+            table[idx]=table[idx]->next;
+            to_delete->next=NULL;
+            delete to_delete;
+            return;
+        }
+        if(temp->next==nullptr){
+            delete temp;
+            table[idx]=NULL;
+            return;
+        }
+        while(temp->next->id!=id){
+            temp=temp->next;
+        }
+        if(temp->next->next==nullptr){
+            delete temp->next;
+            temp->next=nullptr;
+        }
+        else {
+            Node *p=temp->next;
+            temp->next=p->next;
+            p=NULL;
+            delete p;
+        }
+    }
+    
+    void printhashtable()
+    {
+        for(int i=0;i<ts;i++) {
+            cout<<"\tBucket "<< i;
+            Node *temp =table[i];
+            while(temp!=nullptr) {
+                cout<<"--> "<<temp->id;
+                temp= temp->next;
+            }
+            cout<<"-x"<<endl;
+        }
+    }
+    void display() 
+    {
+        cout<<"\t-------------------------------------------------------"<<endl;
+        cout<<"\t|"<<left<<setw(10)<<"ID"<<"|"<<left<<setw(20)<<"Name"<<"|";
+        cout<<left<<setw(10)<<"Branch"<<"|"<<left<<setw(10)<<"CGPA"<<"|"<<endl;
+        cout<<"\t-------------------------------------------------------"<<endl;
+        
+        for(int i=0;i<ts;i++) {
+
+            Node *temp =table[i];
+            
+            while(temp!=nullptr) {
+                cout<<"\t|"<<left<<setw(10)<<temp->id<<"|"<<left<<setw(20)<<temp->Name;
+                cout<<"|"<<left<<setw(10)<<temp->Branch<<"|"<<left<<setw(10)<<temp->cgpa<<"|"<<endl;
+                cout<<"\t-------------------------------------------------------"<<endl;
+                temp= temp->next;
+            }
+        }
+    }
+public:
+    studentHash(int dfsize = 7) {
+        cs =0;
+        ts = dfsize;
+        table = new Node * [ts];
+        for(int i =0;i<ts;i++)
+            table[i] = nullptr;
+    }
+    void Myhash()
+    {
+        int choice,id;
+        float cg;
+        string name,branch;
+        cout << "  -------------------------------------------------------" << endl;
+        cout << " |                       Hashing                         |" << endl;
+        cout << "  -------------------------------------------------------" << endl;
+        cout<<"\n*****we are making records of  student data containing there id's,name ,branch and cgpa stored in the hash table*****"<<endl;
+        while(1) {
+            cout << endl;
+            cout << "\n    X-------------Various operations in Hashing-------------X" << endl << endl;
+
+            cout << "\t*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*" << endl;
+            cout << "\t|       1.Insert data in Hashtable    |" << endl;
+            cout << "\t*       2.Print Hashtable             *" << endl;
+            cout << "\t|       3.Display data in Hashtable   |" << endl;
+            cout << "\t*       4.Search  data                *" << endl;
+            cout << "\t|       5.Delete  data                |" << endl;
+            cout << "\t|       6.Back                        |" << endl;
+            cout << "\t*-*-*-*-*-*-*-*-*-*-*-*-*-*-*--*-*-*-**" << endl;
+            cout << endl;
+            cout << "Enter your choice :>   ";
+            cin >> choice;
+            
+            switch(choice) {
+                case 1: 
+                    cout<<"\nEnter Id, Name , Branch ,Cgpa of student :>"<<endl;
+                    cin>>id>>name>>branch>>cg;
+                    insert(id,name,branch,cg);
+                    cout<<"\nRecord inserted "<<endl;
+                    X();
+                    break;
+                case 2:
+                    printhashtable();
+                    X();
+                    break;
+                case 3:
+                    display();
+                    cout<<endl;
+                    X();
+                    break;
+                case 4: {
+                    cout<<"\nEnter id to search :> ";
+                    cin>>id;
+                    Node *temp =search(id);
+                    if(temp==NULL) {
+                        cout<<"\nNo record is present for this id "<<endl;
+                        X();
+                        return;
+                    }
+                    cout<<"\t-------------------------------------------------------"<<endl;
+                    cout<<"\t|"<<left<<setw(10)<<temp->id<<"|"<<left<<setw(20)<<temp->Name;
+                    cout<<"|"<<left<<setw(10)<<temp->Branch<<"|"<<left<<setw(10)<<temp->cgpa<<"|"<<endl;
+                    cout<<"\t-------------------------------------------------------"<<endl;
+                    X();
+                }
+                    break;
+                case 5:
+                    cout<<"\nEnter the id to delete :> ";
+                    cin>>id;
+                    erase(id);
+                    X();
+                    break;
+                case 6:
+                    return;
+                default :
+                    cout<<"\nWrong choice"<<endl;
+                    X();
+            }
+        }
+    }
+};
 int main()
 {
     int choice;
@@ -2780,8 +3030,8 @@ int main()
         cout << "\t\t|   5.Binary Search Tree    |" << endl;
         cout << "\t\t*   6.Heap                  *" << endl;
         cout << "\t\t|   7.Graph                 |" << endl;
-        cout << "\t\t*   8.Exit                  *" << endl;
-        cout << "\t\t|                           |" << endl;
+        cout << "\t\t*   8.Hashing               *" << endl;
+        cout << "\t\t|   9.Exit                  |" << endl;
         cout << "\t\t*                           *" << endl;
         cout << "\t\t*-*-*-*-*-*-*-*-*-*-*-*-*-*-*" << endl;
         cout << endl;
@@ -2816,7 +3066,11 @@ int main()
             Graph g;
             g.MyGraph();
         } break;
-        case 8:
+        case 8: {
+            studentHash sh;
+            sh.Myhash();
+        } break;
+        case 9:
             exit(0);
         default:
             cout << "\nWrong choice " << endl;
